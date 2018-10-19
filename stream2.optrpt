@@ -1,0 +1,589 @@
+Intel(R) Advisor can now assist with vectorization and show optimization
+  report messages with your source code.
+See "https://software.intel.com/en-us/intel-advisor-xe" for details.
+
+Intel(R) C++ Intel(R) 64 Compiler for applications running on Intel(R) 64, Version 17.0.4.196 Build 20170411
+
+Compiler options: -I. -I../common -O3 -xHost -opt-report=5 -D__ALIGNMENT=32 -o stream2 -lrt
+
+    Report from: Interprocedural optimizations [ipo]
+
+  WHOLE PROGRAM (SAFE) [EITHER METHOD]: false
+  WHOLE PROGRAM (SEEN) [TABLE METHOD]: false
+  WHOLE PROGRAM (READ) [OBJECT READER METHOD]: false
+
+INLINING OPTION VALUES:
+  -inline-factor: 100
+  -inline-min-size: 30
+  -inline-max-size: 230
+  -inline-max-total-size: 2000
+  -inline-max-per-routine: 10000
+  -inline-max-per-compile: 500000
+
+In the inlining report below:
+   "sz" refers to the "size" of the routine. The smaller a routine's size,
+      the more likely it is to be inlined.
+   "isz" refers to the "inlined size" of the routine. This is the amount
+      the calling routine will grow if the called routine is inlined into it.
+      The compiler generally limits the amount a routine can grow by having
+      routines inlined into it.
+
+Begin optimization report for: main(int, char **)
+
+    Report from: Interprocedural optimizations [ipo]
+
+INLINE REPORT: (main(int, char **)) [1/6=16.7%] stream2.cpp(10,1)
+  -> INLINE (MANUAL): (19,11) isdigit(int) (isz = 7) (sz = 14)
+    -> EXTERN: /usr/include/ctype.h:(186,1) __ctype_b_loc()
+  -> INLINE (MANUAL): (20,17) atoi(const char *) (isz = 7) (sz = 14)
+    -> EXTERN: /usr/include/stdlib.h:(280,16) strtol(const char *, char **, int)
+  -> INLINE (MANUAL): (23,11) isdigit(int) (isz = 7) (sz = 14)
+    -> EXTERN: /usr/include/ctype.h:(186,1) __ctype_b_loc()
+  -> INLINE (MANUAL): (24,19) atoi(const char *) (isz = 7) (sz = 14)
+    -> EXTERN: /usr/include/stdlib.h:(280,16) strtol(const char *, char **, int)
+  -> INLINE (MANUAL): (27,11) isdigit(int) (isz = 7) (sz = 14)
+    -> EXTERN: /usr/include/ctype.h:(186,1) __ctype_b_loc()
+  -> INLINE (MANUAL): (28,19) atoi(const char *) (isz = 7) (sz = 14)
+    -> EXTERN: /usr/include/stdlib.h:(280,16) strtol(const char *, char **, int)
+  -> EXTERN: (33,38) operator new[](std::size_t)
+  -> EXTERN: (34,38) operator new[](std::size_t)
+  -> EXTERN: (37,41) operator new[](std::size_t)
+  -> INLINE (MANUAL): (42,27) std::min<int>(const int &, const int &) (isz = 2) (sz = 12)
+  -> INLINE (MANUAL): (42,27) std::min<int>(const int &, const int &) (isz = 2) (sz = 12)
+  -> EXTERN: (45,22) getTimeStamp()
+  -> INLINE (MANUAL): (46,27) std::min<int>(const int &, const int &) (isz = 2) (sz = 12)
+  -> INLINE (MANUAL): (46,27) std::min<int>(const int &, const int &) (isz = 2) (sz = 12)
+  -> EXTERN: (48,25) getTimeStamp()
+  -> EXTERN: (49,17) getElapsedTime(myTimer_t, myTimer_t)
+  -> INLINE (MANUAL): (54,27) std::min<int>(const int &, const int &) (isz = 2) (sz = 12)
+  -> INLINE (MANUAL): (54,27) std::min<int>(const int &, const int &) (isz = 2) (sz = 12)
+  -> INLINE (MANUAL): (55,14) std::abs(double) (isz = 0) (sz = 7)
+  -> INLINE (MANUAL): (56,22) std::min<double>(const double &, const double &) (isz = 2) (sz = 12)
+  -> INLINE (MANUAL): (56,39) std::abs(double) (isz = 0) (sz = 7)
+  -> EXTERN: (58,7) printf(const char *, ...)
+  -> EXTERN: (60,7) printf(const char *, ...)
+  -> EXTERN: (60,42) getTicksPerSecond()
+  -> EXTERN: (63,4) printf(const char *, ...)
+  -> EXTERN: (70,51) log(double)
+  -> EXTERN: (72,21) rint(double)
+  -> EXTERN: (72,26) exp(double)
+  -> EXTERN: (86,28) getTimeStamp()
+  -> EXTERN: (93,25) getElapsedTime(myTimer_t, myTimer_t)
+  -> EXTERN: (93,45) getTimeStamp()
+  -> EXTERN: (99,28) getTimeStamp()
+  -> EXTERN: (106,25) getElapsedTime(myTimer_t, myTimer_t)
+  -> EXTERN: (106,45) getTimeStamp()
+  -> EXTERN: (112,28) getTimeStamp()
+  -> EXTERN: (119,25) getElapsedTime(myTimer_t, myTimer_t)
+  -> EXTERN: (119,45) getTimeStamp()
+  -> EXTERN: (126,28) getTimeStamp()
+  -> EXTERN: (135,25) getElapsedTime(myTimer_t, myTimer_t)
+  -> EXTERN: (135,45) getTimeStamp()
+  -> EXTERN: (137,13) srand(unsigned int)
+  -> EXTERN: (143,25) ?1memcpy
+  -> INLINE (MANUAL): (150,30) std::min<double>(const double &, const double &) (isz = 2) (sz = 12)
+  -> EXTERN: (159,7) printf(const char *, ...)
+
+
+    Report from: Loop nest, Vector & Auto-parallelization optimizations [loop, vec, par]
+
+
+LOOP BEGIN at stream2.cpp(42,27)
+   remark #25408: memset generated
+   remark #15542: loop was not vectorized: inner loop was already vectorized
+
+   LOOP BEGIN at stream2.cpp(42,27)
+      remark #15389: vectorization support: reference a[i] has unaligned access   [ stream2.cpp(43,10) ]
+      remark #15381: vectorization support: unaligned access used inside loop body
+      remark #15305: vectorization support: vector length 8
+      remark #15309: vectorization support: normalized vectorization overhead 0.600
+      remark #15300: LOOP WAS VECTORIZED
+      remark #15451: unmasked unaligned unit stride stores: 1 
+      remark #15475: --- begin vector cost summary ---
+      remark #15476: scalar cost: 4 
+      remark #15477: vector cost: 0.620 
+      remark #15478: estimated potential speedup: 2.660 
+      remark #15488: --- end vector cost summary ---
+      remark #25015: Estimate of max trip count of loop=1
+   LOOP END
+
+   LOOP BEGIN at stream2.cpp(42,27)
+   <Remainder loop for vectorization>
+      remark #15389: vectorization support: reference a[i] has unaligned access   [ stream2.cpp(43,10) ]
+      remark #15381: vectorization support: unaligned access used inside loop body
+      remark #15305: vectorization support: vector length 8
+      remark #15309: vectorization support: normalized vectorization overhead 1.250
+      remark #15301: REMAINDER LOOP WAS VECTORIZED
+      remark #25015: Estimate of max trip count of loop=1
+   LOOP END
+LOOP END
+
+LOOP BEGIN at stream2.cpp(46,27)
+   remark #15382: vectorization support: call to function getTimeStamp() cannot be vectorized   [ stream2.cpp(48,25) ]
+   remark #15382: vectorization support: call to function getElapsedTime(myTimer_t, myTimer_t) cannot be vectorized   [ stream2.cpp(49,17) ]
+   remark #15344: loop was not vectorized: vector dependence prevents vectorization
+LOOP END
+
+LOOP BEGIN at stream2.cpp(54,48)
+<Peeled loop for vectorization>
+   remark #15389: vectorization support: reference a[i+1] has unaligned access   [ stream2.cpp(56,48) ]
+   remark #15389: vectorization support: reference a[i] has unaligned access   [ stream2.cpp(56,55) ]
+   remark #15381: vectorization support: unaligned access used inside loop body
+   remark #15305: vectorization support: vector length 8
+   remark #15309: vectorization support: normalized vectorization overhead 1.167
+   remark #15301: PEEL LOOP WAS VECTORIZED
+LOOP END
+
+LOOP BEGIN at stream2.cpp(54,48)
+   remark #15388: vectorization support: reference a[i+1] has aligned access   [ stream2.cpp(56,48) ]
+   remark #15389: vectorization support: reference a[i] has unaligned access   [ stream2.cpp(56,55) ]
+   remark #15381: vectorization support: unaligned access used inside loop body
+   remark #15305: vectorization support: vector length 8
+   remark #15399: vectorization support: unroll factor set to 2
+   remark #15309: vectorization support: normalized vectorization overhead 0.875
+   remark #15300: LOOP WAS VECTORIZED
+   remark #15442: entire loop may be executed in remainder
+   remark #15448: unmasked aligned unit stride loads: 1 
+   remark #15450: unmasked unaligned unit stride loads: 1 
+   remark #15475: --- begin vector cost summary ---
+   remark #15476: scalar cost: 22 
+   remark #15477: vector cost: 2.500 
+   remark #15478: estimated potential speedup: 7.900 
+   remark #15488: --- end vector cost summary ---
+LOOP END
+
+LOOP BEGIN at stream2.cpp(54,48)
+<Remainder loop for vectorization>
+   remark #15389: vectorization support: reference a[i+1] has unaligned access   [ stream2.cpp(56,48) ]
+   remark #15389: vectorization support: reference a[i] has unaligned access   [ stream2.cpp(56,55) ]
+   remark #15381: vectorization support: unaligned access used inside loop body
+   remark #15305: vectorization support: vector length 8
+   remark #15309: vectorization support: normalized vectorization overhead 1.167
+   remark #15301: REMAINDER LOOP WAS VECTORIZED
+LOOP END
+
+LOOP BEGIN at stream2.cpp(66,4)
+   remark #25236: Loop with pragma of trip count = 34 ignored for large value
+   remark #15542: loop was not vectorized: inner loop was already vectorized
+
+   LOOP BEGIN at stream2.cpp(76,7)
+   <Peeled loop for vectorization>
+      remark #15389: vectorization support: reference b[i] has unaligned access   [ stream2.cpp(77,17) ]
+      remark #15389: vectorization support: reference a[i] has unaligned access   [ stream2.cpp(77,10) ]
+      remark #15381: vectorization support: unaligned access used inside loop body
+      remark #15305: vectorization support: vector length 8
+      remark #15309: vectorization support: normalized vectorization overhead 0.947
+      remark #15301: PEEL LOOP WAS VECTORIZED
+      remark #25015: Estimate of max trip count of loop=1
+   LOOP END
+
+   LOOP BEGIN at stream2.cpp(76,7)
+      remark #15389: vectorization support: reference b[i] has unaligned access   [ stream2.cpp(77,17) ]
+      remark #15389: vectorization support: reference a[i] has unaligned access   [ stream2.cpp(77,10) ]
+      remark #15381: vectorization support: unaligned access used inside loop body
+      remark #15305: vectorization support: vector length 16
+      remark #15309: vectorization support: normalized vectorization overhead 0.929
+      remark #15300: LOOP WAS VECTORIZED
+      remark #15442: entire loop may be executed in remainder
+      remark #15451: unmasked unaligned unit stride stores: 2 
+      remark #15475: --- begin vector cost summary ---
+      remark #15476: scalar cost: 7 
+      remark #15477: vector cost: 0.870 
+      remark #15478: estimated potential speedup: 6.540 
+      remark #15488: --- end vector cost summary ---
+   LOOP END
+
+   LOOP BEGIN at stream2.cpp(76,7)
+   <Remainder loop for vectorization>
+      remark #15389: vectorization support: reference b[i] has unaligned access   [ stream2.cpp(77,17) ]
+      remark #15389: vectorization support: reference a[i] has unaligned access   [ stream2.cpp(77,10) ]
+      remark #15381: vectorization support: unaligned access used inside loop body
+      remark #15305: vectorization support: vector length 8
+      remark #15309: vectorization support: normalized vectorization overhead 0.947
+      remark #15301: REMAINDER LOOP WAS VECTORIZED
+   LOOP END
+
+   LOOP BEGIN at stream2.cpp(80,7)
+      remark #25236: Loop with pragma of trip count = 50 ignored for large value
+      remark #15542: loop was not vectorized: inner loop was already vectorized
+
+      LOOP BEGIN at stream2.cpp(87,13)
+         remark #25096: Loop Interchange not done due to: Imperfect Loop Nest (Either at Source or due to other Compiler Transformations)
+         remark #25452: Original Order found to be proper, but by a close margin
+         remark #25461: Imperfect Loop Unroll-Jammed by 2   (pre-vector) 
+         remark #15542: loop was not vectorized: inner loop was already vectorized
+
+         LOOP BEGIN at stream2.cpp(90,16)
+         <Peeled loop for vectorization>
+            remark #15389: vectorization support: reference a[i] has unaligned access   [ stream2.cpp(91,19) ]
+            remark #15389: vectorization support: reference a[i] has unaligned access   [ stream2.cpp(91,19) ]
+            remark #15381: vectorization support: unaligned access used inside loop body
+            remark #15305: vectorization support: vector length 8
+            remark #15309: vectorization support: normalized vectorization overhead 1.053
+            remark #15301: PEEL LOOP WAS VECTORIZED
+         LOOP END
+
+         LOOP BEGIN at stream2.cpp(90,16)
+            remark #15388: vectorization support: reference a[i] has aligned access   [ stream2.cpp(91,19) ]
+            remark #15388: vectorization support: reference a[i] has aligned access   [ stream2.cpp(91,19) ]
+            remark #15305: vectorization support: vector length 8
+            remark #15399: vectorization support: unroll factor set to 2
+            remark #15309: vectorization support: normalized vectorization overhead 1.000
+            remark #15300: LOOP WAS VECTORIZED
+            remark #15442: entire loop may be executed in remainder
+            remark #15449: unmasked aligned unit stride stores: 2 
+            remark #15475: --- begin vector cost summary ---
+            remark #15476: scalar cost: 7 
+            remark #15477: vector cost: 0.750 
+            remark #15478: estimated potential speedup: 8.330 
+            remark #15488: --- end vector cost summary ---
+         LOOP END
+
+         LOOP BEGIN at stream2.cpp(90,16)
+         <Remainder loop for vectorization>
+            remark #15389: vectorization support: reference a[i] has unaligned access   [ stream2.cpp(91,19) ]
+            remark #15389: vectorization support: reference a[i] has unaligned access   [ stream2.cpp(91,19) ]
+            remark #15381: vectorization support: unaligned access used inside loop body
+            remark #15305: vectorization support: vector length 8
+            remark #15309: vectorization support: normalized vectorization overhead 1.053
+            remark #15301: REMAINDER LOOP WAS VECTORIZED
+         LOOP END
+      LOOP END
+
+      LOOP BEGIN at stream2.cpp(87,13)
+      <Remainder>
+         remark #15542: loop was not vectorized: inner loop was already vectorized
+
+         LOOP BEGIN at stream2.cpp(90,16)
+         <Peeled loop for vectorization>
+            remark #15389: vectorization support: reference a[i] has unaligned access   [ stream2.cpp(91,19) ]
+            remark #15381: vectorization support: unaligned access used inside loop body
+            remark #15305: vectorization support: vector length 8
+            remark #15309: vectorization support: normalized vectorization overhead 1.333
+            remark #15301: PEEL LOOP WAS VECTORIZED
+         LOOP END
+
+         LOOP BEGIN at stream2.cpp(90,16)
+            remark #15388: vectorization support: reference a[i] has aligned access   [ stream2.cpp(91,19) ]
+            remark #15305: vectorization support: vector length 8
+            remark #15399: vectorization support: unroll factor set to 2
+            remark #15309: vectorization support: normalized vectorization overhead 1.833
+            remark #15300: LOOP WAS VECTORIZED
+            remark #15442: entire loop may be executed in remainder
+            remark #15449: unmasked aligned unit stride stores: 1 
+            remark #15475: --- begin vector cost summary ---
+            remark #15476: scalar cost: 4 
+            remark #15477: vector cost: 0.370 
+            remark #15478: estimated potential speedup: 9.160 
+            remark #15488: --- end vector cost summary ---
+         LOOP END
+
+         LOOP BEGIN at stream2.cpp(90,16)
+         <Remainder loop for vectorization>
+            remark #15389: vectorization support: reference a[i] has unaligned access   [ stream2.cpp(91,19) ]
+            remark #15381: vectorization support: unaligned access used inside loop body
+            remark #15305: vectorization support: vector length 8
+            remark #15309: vectorization support: normalized vectorization overhead 1.333
+            remark #15301: REMAINDER LOOP WAS VECTORIZED
+         LOOP END
+      LOOP END
+
+      LOOP BEGIN at stream2.cpp(100,13)
+         remark #25096: Loop Interchange not done due to: Imperfect Loop Nest (Either at Source or due to other Compiler Transformations)
+         remark #25452: Original Order found to be proper, but by a close margin
+         remark #15542: loop was not vectorized: inner loop was already vectorized
+
+         LOOP BEGIN at stream2.cpp(103,16)
+            remark #25399: memcopy generated
+            remark #15542: loop was not vectorized: inner loop was already vectorized
+
+            LOOP BEGIN at stream2.cpp(103,16)
+               remark #15389: vectorization support: reference a[i] has unaligned access   [ stream2.cpp(104,19) ]
+               remark #15389: vectorization support: reference b[i] has unaligned access   [ stream2.cpp(104,26) ]
+               remark #15381: vectorization support: unaligned access used inside loop body
+               remark #15305: vectorization support: vector length 8
+               remark #15309: vectorization support: normalized vectorization overhead 1.000
+               remark #15300: LOOP WAS VECTORIZED
+               remark #15450: unmasked unaligned unit stride loads: 1 
+               remark #15451: unmasked unaligned unit stride stores: 1 
+               remark #15475: --- begin vector cost summary ---
+               remark #15476: scalar cost: 5 
+               remark #15477: vector cost: 0.750 
+               remark #15478: estimated potential speedup: 2.500 
+               remark #15488: --- end vector cost summary ---
+               remark #25015: Estimate of max trip count of loop=1
+            LOOP END
+
+            LOOP BEGIN at stream2.cpp(103,16)
+            <Remainder loop for vectorization>
+               remark #15389: vectorization support: reference a[i] has unaligned access   [ stream2.cpp(104,19) ]
+               remark #15389: vectorization support: reference b[i] has unaligned access   [ stream2.cpp(104,26) ]
+               remark #15381: vectorization support: unaligned access used inside loop body
+               remark #15305: vectorization support: vector length 8
+               remark #15309: vectorization support: normalized vectorization overhead 1.200
+               remark #15301: REMAINDER LOOP WAS VECTORIZED
+               remark #25015: Estimate of max trip count of loop=1
+            LOOP END
+         LOOP END
+      LOOP END
+
+      LOOP BEGIN at stream2.cpp(113,13)
+         remark #25461: Imperfect Loop Unroll-Jammed by 2   (pre-vector) 
+         remark #15542: loop was not vectorized: inner loop was already vectorized
+
+         LOOP BEGIN at stream2.cpp(116,16)
+         <Peeled loop for vectorization>
+            remark #15389: vectorization support: reference b[i] has unaligned access   [ stream2.cpp(117,19) ]
+            remark #15389: vectorization support: reference b[i] has unaligned access   [ stream2.cpp(117,26) ]
+            remark #15389: vectorization support: reference a[i] has unaligned access   [ stream2.cpp(117,35) ]
+            remark #15389: vectorization support: reference b[i] has unaligned access   [ stream2.cpp(117,19) ]
+            remark #15389: vectorization support: reference b[i] has unaligned access   [ stream2.cpp(117,26) ]
+            remark #15389: vectorization support: reference a[i] has unaligned access   [ stream2.cpp(117,35) ]
+            remark #15381: vectorization support: unaligned access used inside loop body
+            remark #15335: peel loop was not vectorized: vectorization possible but seems inefficient. Use vector always directive or -vec-threshold0 to override 
+            remark #15305: vectorization support: vector length 2
+            remark #15309: vectorization support: normalized vectorization overhead 0.224
+            remark #25456: Number of Array Refs Scalar Replaced In Loop: 2
+            remark #25015: Estimate of max trip count of loop=7
+         LOOP END
+
+         LOOP BEGIN at stream2.cpp(116,16)
+            remark #15388: vectorization support: reference b[i] has aligned access   [ stream2.cpp(117,19) ]
+            remark #15388: vectorization support: reference b[i] has aligned access   [ stream2.cpp(117,26) ]
+            remark #15389: vectorization support: reference a[i] has unaligned access   [ stream2.cpp(117,35) ]
+            remark #15388: vectorization support: reference b[i] has aligned access   [ stream2.cpp(117,19) ]
+            remark #15388: vectorization support: reference b[i] has aligned access   [ stream2.cpp(117,26) ]
+            remark #15389: vectorization support: reference a[i] has unaligned access   [ stream2.cpp(117,35) ]
+            remark #15381: vectorization support: unaligned access used inside loop body
+            remark #15305: vectorization support: vector length 8
+            remark #15399: vectorization support: unroll factor set to 2
+            remark #15309: vectorization support: normalized vectorization overhead 0.500
+            remark #15300: LOOP WAS VECTORIZED
+            remark #15442: entire loop may be executed in remainder
+            remark #15448: unmasked aligned unit stride loads: 1 
+            remark #15449: unmasked aligned unit stride stores: 2 
+            remark #15450: unmasked unaligned unit stride loads: 1 
+            remark #15475: --- begin vector cost summary ---
+            remark #15476: scalar cost: 19 
+            remark #15477: vector cost: 1.870 
+            remark #15478: estimated potential speedup: 9.260 
+            remark #15488: --- end vector cost summary ---
+            remark #25456: Number of Array Refs Scalar Replaced In Loop: 4
+         LOOP END
+
+         LOOP BEGIN at stream2.cpp(116,16)
+         <Remainder loop for vectorization>
+            remark #15389: vectorization support: reference b[i] has unaligned access   [ stream2.cpp(117,19) ]
+            remark #15389: vectorization support: reference b[i] has unaligned access   [ stream2.cpp(117,26) ]
+            remark #15389: vectorization support: reference a[i] has unaligned access   [ stream2.cpp(117,35) ]
+            remark #15389: vectorization support: reference b[i] has unaligned access   [ stream2.cpp(117,19) ]
+            remark #15389: vectorization support: reference b[i] has unaligned access   [ stream2.cpp(117,26) ]
+            remark #15389: vectorization support: reference a[i] has unaligned access   [ stream2.cpp(117,35) ]
+            remark #15381: vectorization support: unaligned access used inside loop body
+            remark #15305: vectorization support: vector length 8
+            remark #15309: vectorization support: normalized vectorization overhead 0.252
+            remark #15301: REMAINDER LOOP WAS VECTORIZED
+         LOOP END
+      LOOP END
+
+      LOOP BEGIN at stream2.cpp(113,13)
+      <Remainder>
+         remark #15542: loop was not vectorized: inner loop was already vectorized
+
+         LOOP BEGIN at stream2.cpp(116,16)
+         <Peeled loop for vectorization>
+            remark #15389: vectorization support: reference b[i] has unaligned access   [ stream2.cpp(117,19) ]
+            remark #15389: vectorization support: reference b[i] has unaligned access   [ stream2.cpp(117,26) ]
+            remark #15389: vectorization support: reference a[i] has unaligned access   [ stream2.cpp(117,35) ]
+            remark #15381: vectorization support: unaligned access used inside loop body
+            remark #15305: vectorization support: vector length 8
+            remark #15309: vectorization support: normalized vectorization overhead 0.846
+            remark #15301: PEEL LOOP WAS VECTORIZED
+         LOOP END
+
+         LOOP BEGIN at stream2.cpp(116,16)
+            remark #15389: vectorization support: reference b[i] has unaligned access   [ stream2.cpp(117,19) ]
+            remark #15389: vectorization support: reference b[i] has unaligned access   [ stream2.cpp(117,26) ]
+            remark #15389: vectorization support: reference a[i] has unaligned access   [ stream2.cpp(117,35) ]
+            remark #15381: vectorization support: unaligned access used inside loop body
+            remark #15305: vectorization support: vector length 8
+            remark #15309: vectorization support: normalized vectorization overhead 1.750
+            remark #15300: LOOP WAS VECTORIZED
+            remark #15442: entire loop may be executed in remainder
+            remark #15450: unmasked unaligned unit stride loads: 2 
+            remark #15451: unmasked unaligned unit stride stores: 1 
+            remark #15475: --- begin vector cost summary ---
+            remark #15476: scalar cost: 10 
+            remark #15477: vector cost: 1.000 
+            remark #15478: estimated potential speedup: 8.980 
+            remark #15488: --- end vector cost summary ---
+         LOOP END
+
+         LOOP BEGIN at stream2.cpp(116,16)
+         <Remainder loop for vectorization>
+            remark #15389: vectorization support: reference b[i] has unaligned access   [ stream2.cpp(117,19) ]
+            remark #15389: vectorization support: reference b[i] has unaligned access   [ stream2.cpp(117,26) ]
+            remark #15389: vectorization support: reference a[i] has unaligned access   [ stream2.cpp(117,35) ]
+            remark #15381: vectorization support: unaligned access used inside loop body
+            remark #15305: vectorization support: vector length 8
+            remark #15309: vectorization support: normalized vectorization overhead 0.846
+            remark #15301: REMAINDER LOOP WAS VECTORIZED
+         LOOP END
+      LOOP END
+
+      LOOP BEGIN at stream2.cpp(127,13)
+         remark #25096: Loop Interchange not done due to: Imperfect Loop Nest (Either at Source or due to other Compiler Transformations)
+         remark #25452: Original Order found to be proper, but by a close margin
+         remark #15542: loop was not vectorized: inner loop was already vectorized
+
+         LOOP BEGIN at stream2.cpp(131,16)
+         <Peeled loop for vectorization>
+            remark #15389: vectorization support: reference a[i] has unaligned access   [ stream2.cpp(132,26) ]
+            remark #15389: vectorization support: reference b[i] has unaligned access   [ stream2.cpp(132,31) ]
+            remark #15381: vectorization support: unaligned access used inside loop body
+            remark #15335: peel loop was not vectorized: vectorization possible but seems inefficient. Use vector always directive or -vec-threshold0 to override 
+            remark #15305: vectorization support: vector length 8
+            remark #15309: vectorization support: normalized vectorization overhead 1.955
+            remark #25015: Estimate of max trip count of loop=15
+         LOOP END
+
+         LOOP BEGIN at stream2.cpp(131,16)
+            remark #15389: vectorization support: reference a[i] has unaligned access   [ stream2.cpp(132,26) ]
+            remark #15389: vectorization support: reference b[i] has unaligned access   [ stream2.cpp(132,31) ]
+            remark #15381: vectorization support: unaligned access used inside loop body
+            remark #15305: vectorization support: vector length 16
+            remark #15309: vectorization support: normalized vectorization overhead 2.733
+            remark #15300: LOOP WAS VECTORIZED
+            remark #15442: entire loop may be executed in remainder
+            remark #15450: unmasked unaligned unit stride loads: 2 
+            remark #15475: --- begin vector cost summary ---
+            remark #15476: scalar cost: 8 
+            remark #15477: vector cost: 0.930 
+            remark #15478: estimated potential speedup: 6.460 
+            remark #15488: --- end vector cost summary ---
+         LOOP END
+
+         LOOP BEGIN at stream2.cpp(131,16)
+         <Remainder loop for vectorization>
+            remark #15389: vectorization support: reference a[i] has unaligned access   [ stream2.cpp(132,26) ]
+            remark #15389: vectorization support: reference b[i] has unaligned access   [ stream2.cpp(132,31) ]
+            remark #15381: vectorization support: unaligned access used inside loop body
+            remark #15305: vectorization support: vector length 8
+            remark #15309: vectorization support: normalized vectorization overhead 1.955
+            remark #15301: REMAINDER LOOP WAS VECTORIZED
+         LOOP END
+      LOOP END
+   LOOP END
+
+   LOOP BEGIN at stream2.cpp(144,7)
+   <Distributed chunk1>
+      remark #25426: Loop Distributed (2 way) 
+      remark #15388: vectorization support: reference bestTime[test] has aligned access   [ stream2.cpp(146,10) ]
+      remark #15305: vectorization support: vector length 4
+      remark #15427: loop was completely unrolled
+      remark #15301: PARTIAL LOOP WAS VECTORIZED
+      remark #15449: unmasked aligned unit stride stores: 1 
+      remark #15475: --- begin vector cost summary ---
+      remark #15476: scalar cost: 3 
+      remark #15477: vector cost: 0.750 
+      remark #15478: estimated potential speedup: 4.000 
+      remark #15488: --- end vector cost summary ---
+   LOOP END
+
+   LOOP BEGIN at stream2.cpp(144,7)
+   <Distributed chunk2>
+      remark #25096: Loop Interchange not done due to: Imperfect Loop Nest (Either at Source or due to other Compiler Transformations)
+      remark #25451: Advice: Loop Interchange, if possible, might help loopnest. Suggested Permutation : ( 1 2 ) --> ( 2 1 ) 
+      remark #15542: loop was not vectorized: inner loop was already vectorized
+      remark #25015: Estimate of max trip count of loop=4
+
+      LOOP BEGIN at stream2.cpp(148,10)
+         remark #25085: Preprocess Loopnests: Moving Out Load and Store    [ stream2.cpp(150,13) ]
+         remark #25085: Preprocess Loopnests: Moving Out Load and Store    [ stream2.cpp(151,13) ]
+         remark #15415: vectorization support: non-unit strided load was generated for the variable <time[k][test]>, stride is 4   [ stream2.cpp(150,55) ]
+         remark #15415: vectorization support: non-unit strided load was generated for the variable <time[k][test]>, stride is 4   [ stream2.cpp(151,30) ]
+         remark #15305: vectorization support: vector length 16
+         remark #15309: vectorization support: normalized vectorization overhead 0.819
+         remark #15300: LOOP WAS VECTORIZED
+         remark #15452: unmasked strided loads: 2 
+         remark #15475: --- begin vector cost summary ---
+         remark #15476: scalar cost: 12 
+         remark #15477: vector cost: 4.500 
+         remark #15478: estimated potential speedup: 2.400 
+         remark #15488: --- end vector cost summary ---
+      LOOP END
+
+      LOOP BEGIN at stream2.cpp(148,10)
+      <Remainder loop for vectorization>
+         remark #15305: vectorization support: vector length 8
+         remark #15309: vectorization support: normalized vectorization overhead 1.265
+         remark #15301: REMAINDER LOOP WAS VECTORIZED
+      LOOP END
+   LOOP END
+LOOP END
+
+    Report from: Code generation optimizations [cg]
+
+stream2.cpp(55,23):remark #34060: alignment of adjacent dense (unit-strided stencil) loads is (alignment, offset): (64, 56)
+stream2.cpp(55,23):remark #34054: adjacent dense (unit-strided stencil) loads optimized for speed. Details: stride { 8 }, step { 8 }, types { F64-V512, F64-V512 }, number of elements { 8 }, select mask { 0x000000003 }.
+stream2.cpp(55,23):remark #34060: alignment of adjacent dense (unit-strided stencil) loads is (alignment, offset): (64, 56)
+stream2.cpp(55,23):remark #34054: adjacent dense (unit-strided stencil) loads optimized for speed. Details: stride { 8 }, step { 8 }, types { F64-V512, F64-V512 }, number of elements { 8 }, select mask { 0x000000003 }.
+stream2.cpp(43,10):remark #34014: optimization advice for memset: increase the destination's alignment to 16 (and use __assume_aligned) to speed up library implementation
+stream2.cpp(43,10):remark #34026: call to memset implemented as a call to optimized library version
+stream2.cpp(104,19):remark #34014: optimization advice for memcpy: increase the destination's alignment to 16 (and use __assume_aligned) to speed up library implementation
+stream2.cpp(104,19):remark #34014: optimization advice for memcpy: increase the source's alignment to 16 (and use __assume_aligned) to speed up library implementation
+stream2.cpp(104,19):remark #34026: call to memcpy implemented as a call to optimized library version
+stream2.cpp(10,1):remark #34051: REGISTER ALLOCATION : [main] stream2.cpp:10
+
+    Hardware registers
+        Reserved     :    2[ rsp rip]
+        Available    :   63[ rax rdx rcx rbx rbp rsi rdi r8-r15 mm0-mm7 zmm0-zmm31 k0-k7]
+        Callee-save  :    6[ rbx rbp r12-r15]
+        Assigned     :   44[ rax rdx rcx rbx rsi rdi r8-r15 zmm0-zmm25 k0-k3]
+        
+    Routine temporaries
+        Total         :     869
+            Global    :     340
+            Local     :     529
+        Regenerable   :      66
+        Spilled       :      52
+        
+    Routine stack
+        Variables     :     228 bytes*
+            Reads     :      22 [2.90e+02 ~ 0.2%]
+            Writes    :      26 [3.05e+02 ~ 0.2%]
+        Spills        :     496 bytes*
+            Reads     :     128 [4.11e+03 ~ 3.0%]
+            Writes    :      63 [3.00e+02 ~ 0.2%]
+    
+    Notes
+    
+        *Non-overlapping variables and spills may share stack space,
+         so the total stack size might be less than this.
+    
+
+===========================================================================
+
+Begin optimization report for: std::abs(double)
+
+    Report from: Interprocedural optimizations [ipo]
+
+DEAD STATIC FUNCTION: (std::abs(double)) /opt/apps/gcc/5.4.0/include/c++/5.4.0/cmath(82,3)
+
+===========================================================================
+
+Begin optimization report for: std::min<int>(const int &, const int &)
+
+    Report from: Interprocedural optimizations [ipo]
+
+DEAD STATIC FUNCTION: (std::min<int>(const int &, const int &)) /opt/apps/gcc/5.4.0/include/c++/5.4.0/bits/stl_algobase.h(196,5)
+
+===========================================================================
+
+Begin optimization report for: std::min<double>(const double &, const double &)
+
+    Report from: Interprocedural optimizations [ipo]
+
+DEAD STATIC FUNCTION: (std::min<double>(const double &, const double &)) /opt/apps/gcc/5.4.0/include/c++/5.4.0/bits/stl_algobase.h(196,5)
+
+===========================================================================
